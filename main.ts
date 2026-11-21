@@ -5,7 +5,7 @@
 // scorer can verify the game, its screenshots and the dossier byte for byte.
 //
 //   MAKEFUN_OUTPUT_DIR=out node main.ts
-import { cpSync, existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildDossier } from './vendor/makefun-game.ts';
@@ -15,8 +15,6 @@ const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
 const gameDir = join(repoRoot, 'game');
 const shotsDir = join(repoRoot, 'screenshots');
 
-// Start from a clean output directory so a stale file can never leak in.
-rmSync(outDir, { recursive: true, force: true });
 mkdirSync(outDir, { recursive: true });
 
 // The playable game, plain static files, exactly as it sits in the repo.
