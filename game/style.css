@@ -1,0 +1,139 @@
+/* Spot the Difference — Night Market Mysteries: warm dusk palette, chunky readable HUD. */
+:root {
+  --ink: #fff7e6;
+  --ink-dim: #d8c9a8;
+  --bg: #171226;
+  --bg2: #241a3a;
+  --panel: #2b2144;
+  --line: #4a3a6e;
+  --gold: #ffc94d;
+  --gold-deep: #e89b2e;
+  --green: #7ddc8a;
+  --red: #ff6b6b;
+  --blue: #6ec6ff;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: radial-gradient(1200px 700px at 50% -10%, #3a2a5e 0%, var(--bg) 55%, #100c1c 100%);
+  color: var(--ink);
+  font-family: "Trebuchet MS", "Segoe UI", Verdana, sans-serif;
+  min-height: 100vh;
+}
+#app { max-width: 1240px; margin: 0 auto; padding: 14px 18px 20px; }
+
+#topbar {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 16px; flex-wrap: wrap; padding: 4px 2px 12px;
+  border-bottom: 2px solid var(--line);
+}
+.brand { display: flex; align-items: baseline; gap: 10px; }
+.brand-mark { color: var(--gold); font-size: 26px; line-height: 1; }
+.brand-name { font-size: 26px; font-weight: 900; letter-spacing: 2px; color: var(--ink); }
+.brand-sub { font-size: 13px; color: var(--gold); letter-spacing: 1px; font-style: italic; }
+.top-stats { display: flex; gap: 10px; }
+.stat {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+  padding: 6px 14px; text-align: center; min-width: 96px;
+}
+.stat-label { display: block; font-size: 10px; letter-spacing: 2px; color: var(--ink-dim); }
+.stat-value { font-size: 22px; font-weight: 900; color: var(--gold); }
+
+#hud {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin: 12px 0; padding: 10px 14px;
+  background: var(--bg2); border: 1px solid var(--line); border-radius: 12px;
+}
+.hud-item { display: flex; align-items: center; gap: 8px; }
+.hud-scene { font-size: 20px; font-weight: 800; color: var(--ink); min-width: 170px; }
+.hud-label { font-size: 10px; letter-spacing: 2px; color: var(--ink-dim); }
+.hud-big { font-size: 22px; font-weight: 900; }
+#timer.low { color: var(--red); animation: pulse 1s infinite; }
+@keyframes pulse { 50% { opacity: 0.55; } }
+#timerBar { width: 130px; height: 8px; background: #171226; border-radius: 6px; overflow: hidden; }
+#timerFill { height: 100%; width: 100%; background: var(--green); border-radius: 6px; transition: width 0.3s linear, background 0.3s; }
+.dots { display: inline-flex; gap: 5px; }
+.dots i { width: 11px; height: 11px; border-radius: 50%; background: #4a3a6e; border: 1px solid #6b5a94; display: inline-block; }
+.dots i.on { background: var(--green); border-color: var(--green); }
+button {
+  font-family: inherit; font-size: 14px; font-weight: 700; color: var(--ink);
+  background: #3a2c5c; border: 1px solid var(--line); border-radius: 9px;
+  padding: 8px 13px; cursor: pointer;
+}
+button:hover { background: #4a3a74; border-color: var(--gold); }
+button:disabled { opacity: 0.45; cursor: default; }
+#hintBtn { background: #5a4313; border-color: var(--gold-deep); }
+#hintBtn:hover { background: #6e5420; }
+.hud-buttons { margin-left: auto; display: flex; gap: 8px; }
+
+#boards { display: flex; align-items: stretch; gap: 14px; justify-content: center; }
+.panel {
+  margin: 0; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 14px; padding: 10px 10px 8px; flex: 1 1 0; max-width: 580px;
+}
+.panel figcaption {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; letter-spacing: 2px; color: var(--ink-dim); padding: 0 4px 8px;
+}
+.panel-tag {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--gold); color: #241a10; font-weight: 900; font-size: 14px;
+}
+.panel canvas { display: block; width: 100%; height: auto; border-radius: 8px; cursor: crosshair; }
+#versus {
+  align-self: center; font-size: 26px; font-weight: 900; color: var(--gold);
+  text-shadow: 0 2px 0 #7a5a10; flex: 0 0 auto;
+}
+#toast {
+  min-height: 30px; margin: 10px 2px 0; text-align: center;
+  font-size: 17px; font-weight: 700; color: var(--gold);
+}
+#toast.good { color: var(--green); }
+#toast.bad { color: var(--red); }
+#foot {
+  display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  color: var(--ink-dim); font-size: 13px; padding: 6px 2px 0;
+}
+kbd {
+  background: #3a2c5c; border: 1px solid var(--line); border-bottom-width: 2px;
+  border-radius: 5px; padding: 1px 6px; font-family: inherit;
+}
+
+#overlay {
+  position: fixed; inset: 0; background: rgba(12, 8, 24, 0.82);
+  display: flex; align-items: center; justify-content: center; z-index: 20; padding: 20px;
+}
+#overlay.hidden { display: none; }
+#overlayCard {
+  background: var(--bg2); border: 2px solid var(--gold-deep); border-radius: 18px;
+  max-width: 620px; width: 100%; padding: 28px 30px; text-align: center;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.6);
+}
+#overlayCard h1 { margin: 0 0 6px; font-size: 34px; letter-spacing: 1px; }
+#overlayCard h2 { margin: 0 0 10px; font-size: 22px; color: var(--gold); }
+#overlayCard p { color: var(--ink-dim); font-size: 15px; line-height: 1.55; margin: 8px 0; }
+#overlayCard .big-score { font-size: 44px; font-weight: 900; color: var(--gold); margin: 6px 0; }
+#overlayCard .stars { font-size: 34px; letter-spacing: 6px; color: var(--gold); margin: 4px 0 10px; }
+#overlayCard .menu-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+#overlayCard .menu-btns button { font-size: 16px; padding: 11px 20px; }
+#overlayCard .primary { background: var(--gold-deep); border-color: var(--gold); color: #241a10; }
+#overlayCard .primary:hover { background: var(--gold); }
+.level-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 18px 0 6px; }
+.level-card {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+  padding: 12px 6px; cursor: pointer; text-align: center;
+}
+.level-card:hover { border-color: var(--gold); background: #342a55; }
+.level-card .lv-emoji { font-size: 30px; display: block; margin-bottom: 6px; }
+.level-card .lv-name { font-size: 12px; font-weight: 800; display: block; line-height: 1.3; }
+.level-card .lv-meta { font-size: 11px; color: var(--ink-dim); display: block; margin-top: 4px; }
+.level-card.done { border-color: var(--green); }
+.level-card.done .lv-meta { color: var(--green); }
+.howto { text-align: left; font-size: 14px; }
+.howto li { margin: 4px 0; }
+@media (max-width: 900px) {
+  #boards { flex-direction: column; }
+  #versus { align-self: center; transform: rotate(90deg); }
+  .level-grid { grid-template-columns: repeat(2, 1fr); }
+}

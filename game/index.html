@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spot the Difference — Night Market Mysteries</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <header id="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">&#9670;</span>
+      <span class="brand-name">SPOT THE DIFFERENCE</span>
+      <span class="brand-sub">Night Market Mysteries</span>
+    </div>
+    <div class="top-stats">
+      <div class="stat"><span class="stat-label">SCORE</span><span id="score" class="stat-value">0</span></div>
+      <div class="stat"><span class="stat-label">STREAK</span><span id="streak" class="stat-value">&#215;1</span></div>
+      <div class="stat"><span class="stat-label">LEVEL</span><span id="levelLabel" class="stat-value">1 / 5</span></div>
+    </div>
+  </header>
+
+  <section id="hud" aria-label="game status">
+    <div class="hud-item hud-scene"><span id="sceneName">Night Market</span></div>
+    <div class="hud-item hud-found">
+      <span class="hud-label">FOUND</span>
+      <span id="foundCount" class="hud-big">0 / 7</span>
+      <span id="foundDots" class="dots" aria-hidden="true"></span>
+    </div>
+    <div class="hud-item hud-timer">
+      <span class="hud-label">TIME LEFT</span>
+      <span id="timer" class="hud-big">02:00</span>
+      <div id="timerBar"><div id="timerFill"></div></div>
+    </div>
+    <div class="hud-item hud-hints">
+      <span class="hud-label">HINTS</span>
+      <button id="hintBtn" type="button" title="Reveal one difference (H)">&#128161; Hint <b id="hintCount">3</b></button>
+    </div>
+    <div class="hud-item hud-buttons">
+      <button id="soundBtn" type="button" title="Toggle sound (M)">&#9834; Sound: On</button>
+      <button id="menuBtn" type="button" title="Back to menu (Esc)">&#9776; Menu</button>
+    </div>
+  </section>
+
+  <main id="boards">
+    <figure class="panel" id="panelA">
+      <figcaption><span class="panel-tag">A</span> Original</figcaption>
+      <canvas id="canvasA" width="560" height="400"></canvas>
+    </figure>
+    <div id="versus" aria-hidden="true">VS</div>
+    <figure class="panel" id="panelB">
+      <figcaption><span class="panel-tag">B</span> Changed</figcaption>
+      <canvas id="canvasB" width="560" height="400"></canvas>
+    </figure>
+  </main>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <footer id="foot">
+    <span>Click a difference on either picture &mdash; or press <kbd>H</kbd> for a hint, <kbd>M</kbd> to mute.</span>
+    <span id="progressText">Scene 1 of 5 &middot; find all 7 differences</span>
+  </footer>
+
+  <div id="overlay" class="hidden">
+    <div id="overlayCard"></div>
+  </div>
+</div>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
